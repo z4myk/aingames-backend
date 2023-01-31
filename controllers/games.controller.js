@@ -76,3 +76,28 @@ const updateGamePublication = (req, res) => {
       console.log(error)
   }
 };
+
+
+const deleteGamePublication = (req, res) => {
+    try{
+        const {id} = req.params;
+
+        gameSchema
+        .deleteOne({_id: id})
+        .then((data) => res.json(data))
+        .catch((error) => res.json({msg: error}))
+    }catch(error){
+        console.log(error)
+    }
+} 
+
+module.exports = {
+    createGamePublication,
+    fetchGamePublication,
+    getOneGamePublication,
+    updateGamePublication,
+    deleteGamePublication,
+
+
+
+}
