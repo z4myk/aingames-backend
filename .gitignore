@@ -2,4 +2,4 @@
 .node_modules
 userdatabase.txt
 .userdatabase.txt
-.gitignore
+gitignore
