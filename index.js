@@ -1,28 +1,32 @@
 const express = require("express");
-const app = express();
-const mongoose = require("mongoose");
-const cors = require("cors");
-const gamePublication = require('./routes/games')
 require("dotenv").config();
+const cors = require("cors");
+const {dbConnection} = require('./database/config')
 
+//Creando sv express
+const app = express();
+
+//Base de datos
+dbConnection();
+
+//CORS
 app.use(cors());
+
+//Directorio público
+app.use( express.static('public') );
+
+//Lectura y parseo del body
 app.use(express.json());
 
+/**Rutas**/
+//Games
+app.use('/api/games', require('./routes/games'));
+
+//Auth
+app.use('/api/auth', require('./routes/auth'));
 
 
-
-
-
-
-mongoose.set("strictQuery", false);
-mongoose
-  .connect(process.env.MONGODB_LOCAL,{
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    })
-  .then(() => console.log("DB ONLINE"))
-  .catch((error) => console.log(error));
-
-app.listen(process.env.PORT || "9001", () => {  
-  console.log("Servidor corriendo en puerto", process.env.PORT);
+//Escuchar peticiones
+app.listen(process.env.PORT, () => {
+  console.log(`Servidor corriendo en el puerto: ${process.env.PORT}`)
 });
