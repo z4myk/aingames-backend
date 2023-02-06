@@ -11,7 +11,7 @@ const gameSchema = mongoose.Schema({
     required: true,
   },
   categoria: {
-    type: Object,
+    type: String,
     required: true,
   },
   sistemaOp: {
