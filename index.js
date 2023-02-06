@@ -26,6 +26,7 @@ app.use('/api/games', require('./routes/games'));
 app.use('/api/auth', require('./routes/auth'));
 
 
+
 //Escuchar peticiones
 app.listen(process.env.PORT, () => {
   console.log(`Servidor corriendo en el puerto: ${process.env.PORT}`)
