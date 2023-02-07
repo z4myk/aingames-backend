@@ -16,8 +16,6 @@ router.get("/", fetchGamePublication);
 router.get("/:id", getOneGamePublication);
 
 
-
-
 //A partir de aqui abajo todas las rutas estan protegidas por un token.
 // router.use(validateJWT);
 
