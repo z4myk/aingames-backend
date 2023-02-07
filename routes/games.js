@@ -2,9 +2,11 @@ const express = require('express');
 const {createGamePublication, fetchGamePublication, getOneGamePublication, updateGamePublication, deleteGamePublication} = require('../controllers/games');
 const {Router} = require('express');
 const { validateJWT } = require('../middlewares/validate-jwt');
+const { getSteamGameDetails } = require('../controllers/steam');
 const router = Router();
 
 // URL => /api/games
+router.get(`/apisteam`, getSteamGameDetails)
 
 
 //get all game posts
@@ -15,9 +17,9 @@ router.get("/:id", getOneGamePublication);
 
 
 
+
 //A partir de aqui abajo todas las rutas estan protegidas por un token.
 // router.use(validateJWT);
-
 
 //update game post
 router.put("/:id", updateGamePublication);

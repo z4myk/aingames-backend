@@ -1,6 +1,7 @@
 const { response } = require("express");
 const { findById } = require("../models/Game");
 const Game = require("../models/Game");
+var XMLHttpRequest = require('xhr2');
 
 const createGamePublication = (req, res) => {
 
@@ -97,6 +98,9 @@ const deleteGamePublication = (req, res) => {
     console.log(error)
   }
 }
+
+
+
 
 module.exports = {
   createGamePublication,
