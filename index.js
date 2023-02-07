@@ -26,6 +26,7 @@ app.use('/api/games', require('./routes/games'));
 app.use('/api/auth', require('./routes/auth'));
 
 
+
 // Add headers
 app.use(function (req, res, next) {
 
