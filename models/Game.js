@@ -5,35 +5,11 @@ const gameSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  peso: {
-    type: Number,
-    required: true,
-  },
-  categoria: {
+  requerimientos: {
     type: String,
-    required: true,
+    require: true,
   },
-  sistemaOp: {
-    type: String,
-    required: true,
-  },
-  procesador: {
-    type: String,
-    required: true,
-  },
-  memoria: {
-    type: String,
-    required: true,
-  },
-  graficos: {
-    type: String,
-    required: true,
-  },
-  almacenamiento: {
-    type: String,
-    required: true,
-  },
-  plataforma: {
+  steamId: {
     type: String,
     required: true,
   },

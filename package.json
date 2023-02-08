@@ -1,9 +1,11 @@
 {
+  
   "name": "ain-backend",
   "version": "1.0.0",
   "description": "backend games",
   "main": "index.js",
   "license": "MIT",
+  
   "scripts": {
     "start": "nodemon src/index.js"
   },
@@ -13,6 +15,8 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
-    "mongoose": "^6.9.0"
+    "mongoose": "^6.9.0",
+    "node-fetch": "^3.3.0",
+    "xhr2": "^0.2.1"
   }
 }
