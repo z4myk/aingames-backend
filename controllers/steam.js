@@ -7,7 +7,6 @@ var XMLHttpRequest = require('xhr2');
 function getSteamGameDetails(req, res) {
 
     var xhttp = new XMLHttpRequest();
-
     const { appids } = req.query;
 
     xhttp.onreadystatechange = function logger() {
@@ -16,13 +15,14 @@ function getSteamGameDetails(req, res) {
             const obj = JSON.parse(this.responseText);
             const key = appids
             const { [key]: y } = obj
+            // console.log(y.data);
             res.json({
                 resp: y.data,
             })
         }
     };
     xhttp.open('GET', `https://store.steampowered.com/api/appdetails?appids=${appids}`, true);
-
+    console.log(xhttp);
     xhttp.send();
 }
 
