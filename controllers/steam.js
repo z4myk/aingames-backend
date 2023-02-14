@@ -22,7 +22,6 @@ function getSteamGameDetails(req, res) {
         }
     };
     xhttp.open('GET', `https://store.steampowered.com/api/appdetails?appids=${appids}&l=spanish`, true);
-    console.log(xhttp);
     xhttp.send();
 }
 
