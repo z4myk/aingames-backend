@@ -13,6 +13,14 @@ const gameSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  generos: {
+    type: Array,
+    required: true,
+  },
+  header_image: {
+    type: String,
+    required: true,
+  },
   googleServ: {
     type: String,
   },
@@ -22,7 +30,7 @@ const gameSchema = mongoose.Schema({
   torrentServ: {
     type: String,
   },
-  dddownload: {
+  ddownloadServ: {
     type: String,
   },
 });
