@@ -8,7 +8,7 @@ const uploadImage = async (req, res) => {
 
     console.log(file);
     
-    file.mv(`./files/${file.name}`, err => {
+    file.mv(`/home/aintech-online/server/${file.name}`, err => {
         if(err) return res.send({msg: err});
         return res.send({message:'true'});
     })
