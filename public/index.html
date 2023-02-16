@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html lang="es" xml:lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <h1>Si</h1>
     <script type="module" src="index.js"></script>
+
+    <form action='http://localhost:9001/api/image/upload' method="POST" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Subir">
+    </form>
 </body>
+
 </html>
