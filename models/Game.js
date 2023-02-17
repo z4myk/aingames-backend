@@ -13,14 +13,19 @@ const gameSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  generos: {
-    type: Array,
-    required: true,
-  },
   header_image: {
     type: String,
-    required: true,
   },
+  detalle: {
+    type: [Object],
+  },
+  comprarJuego: {
+    type: String,
+  },
+  observaciones: {
+    type: String,
+  },
+
   googleServ: {
     type: String,
   },
@@ -33,6 +38,8 @@ const gameSchema = mongoose.Schema({
   ddownloadServ: {
     type: String,
   },
+}, {
+  timestamps: true,
 });
 
 module.exports = mongoose.model("Game", gameSchema);
