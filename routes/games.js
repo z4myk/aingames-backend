@@ -1,4 +1,3 @@
-const express = require('express');
 const {createGamePublication, fetchGamePublication, getOneGamePublication, updateGamePublication, deleteGamePublication} = require('../controllers/games');
 const {Router} = require('express');
 const { validateJWT } = require('../middlewares/validate-jwt');

@@ -2,6 +2,7 @@ const express = require("express");
 require("dotenv").config();
 const cors = require("cors");
 const {dbConnection} = require('./database/config')
+const fileUpload = require("express-fileupload");
 
 //Creando sv express
 const app = express();
@@ -15,6 +16,11 @@ app.use(cors());
 //Directorio público
 app.use( express.static('public') );
 
+//interpretar archivos
+app.use(fileUpload({
+  tempFileDir: '/temp'
+}));
+
 //Lectura y parseo del body
 app.use(express.json());
 
@@ -25,6 +31,8 @@ app.use('/api/games', require('./routes/games'));
 //Auth
 app.use('/api/auth', require('./routes/auth'));
 
+//Images
+app.use('/api/images', require('./routes/images'));
 
 
 // Add headers
