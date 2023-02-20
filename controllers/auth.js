@@ -57,12 +57,13 @@ const loginUser = async (req, res = response) => {
                 msg: "Contraseña incorrecta."
             });
         }
-        const token = await generateJWT( user.id, user.name );
+        const token = await generateJWT( user.id, user.name, user.email );
 
         res.json({
             ok: true,
             uid: user.id,
             name: user.name,
+            email: user.email,
             token
         })
 
