@@ -8,7 +8,7 @@ const uploadImage = async (req, res = response) => {
     try {
         if (req.files == null || req.body.game == null || req.body.name == null) return res.status(400).json({
             ok: false,
-            msg: "Ocurrió un error al ingresar los datos"
+            msg: "Ocurrió un error al ingresar los datos."
         });
 
         const { file } = req.files;
@@ -37,7 +37,7 @@ const uploadImage = async (req, res = response) => {
     } catch (error) {
         res.status(500).json({
             ok: false,
-            msg: 'Error interno, hable con el administrador'
+            msg: 'Error interno, hable con el administrador.'
         })
     }
 }

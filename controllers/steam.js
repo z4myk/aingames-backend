@@ -1,10 +1,8 @@
 const { response } = require("express");
-const { findById } = require("../models/Game");
-const Game = require("../models/Game");
 var XMLHttpRequest = require('xhr2');
 
 
-function getSteamGameDetails(req, res) {
+function getSteamGameDetails(req, res = response) {
 
     var xhttp = new XMLHttpRequest();
     const { appids } = req.query;
