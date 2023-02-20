@@ -100,6 +100,7 @@ const deleteGamePublication = (req, res = response) => {
 const getGamesByRequirements = async (req, res = response) => {
 
   const { requirements } = req.params;
+  
   try {
 
     const games = await Game.find({ requirements });

@@ -19,8 +19,8 @@ const getOneUser = async (req, res = response) => {
     const userId = req.params.id;
 
     try {
-        const user = await User.findById(userId).populate('role', 'name _id');
-        console.log(user);
+        const user = await User.findById(userId)
+        .populate('role', 'name _id');
         
         if(!user){
             res.status(404).json({
