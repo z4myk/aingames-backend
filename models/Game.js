@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 
 const gameSchema = mongoose.Schema({
-  nombre: {
+  name: {
     type: String,
     required: true,
   },
-  requerimientos: {
+  requirements: {
     type: String,
     require: true,
   },
@@ -16,27 +16,26 @@ const gameSchema = mongoose.Schema({
   header_image: {
     type: String,
   },
-  detalle: {
+  detail: {
     type: [Object],
   },
-  comprarJuego: {
+  buyGame: {
     type: String,
   },
-  observaciones: {
+  notes: {
     type: String,
   },
-
-  googleServ: {
-    type: String,
+  serverOne: {
+    type: [Object],
   },
-  mediafireServ: {
-    type: String,
+  serverTwo: {
+    type: [Object],
   },
-  torrentServ: {
-    type: String,
+  serverThree: {
+    type: [Object],
   },
-  ddownloadServ: {
-    type: String,
+  serverFour: {
+    type: [Object],
   },
 }, {
   timestamps: true,

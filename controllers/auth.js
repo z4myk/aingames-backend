@@ -23,12 +23,13 @@ const createUser = async (req, res = response) => {
         await user.save();
 
         //Generar JWT
-        const token = await generateJWT( user.id, user.name );
+        const token = await generateJWT( user.id, user.name, user.role );
 
         res.status(201).json({
             ok: true,
             uid: user.id,
             name: user.name,
+            role: user.role,
             token
         });
 
@@ -57,12 +58,13 @@ const loginUser = async (req, res = response) => {
                 msg: "Contraseña incorrecta."
             });
         }
-        const token = await generateJWT( user.id, user.name, user.email );
+        const token = await generateJWT( user.id, user.name, user.role, user.email );
 
         res.json({
             ok: true,
             uid: user.id,
             name: user.name,
+            role: user.role,
             email: user.email,
             token
         })
@@ -74,14 +76,16 @@ const loginUser = async (req, res = response) => {
 
 const revalidateToken = async (req, res) => {
 
-    const {uid, name }= req;
+    const {uid, name, role } = req;
+    console.log(req);
 
     //Generar un nuevo JWT y retornarlo en esta petición
-    const token = await generateJWT( uid, name );
+    const token = await generateJWT( uid, name, role );
 
     res.json({
         ok: true,
         uid, name,
+        role,
         token
     })
 }
@@ -90,5 +94,5 @@ const revalidateToken = async (req, res) => {
 module.exports = {
     createUser,
     loginUser,
-    revalidateToken
+    revalidateToken,
 }

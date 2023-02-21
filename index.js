@@ -31,9 +31,14 @@ app.use('/api/games', require('./routes/games'));
 //Auth
 app.use('/api/auth', require('./routes/auth'));
 
+//User
+app.use('/api/user', require('./routes/user'));
+
 //Images
 app.use('/api/images', require('./routes/images'));
 
+//Roles
+app.use('/api/roles', require('./routes/roles'));
 
 // Add headers
 app.use(function (req, res, next) {

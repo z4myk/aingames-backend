@@ -1,9 +1,7 @@
 const { response } = require("express");
-const { findById } = require("../models/Game");
 const Game = require("../models/Game");
-var XMLHttpRequest = require('xhr2');
 
-const createGamePublication = (req, res) => {
+const createGamePublication = (req, res = response) => {
 
   try {
     const gamePublication = Game(req.body);
@@ -87,7 +85,7 @@ const updateGamePublication = async (req, res = response) => {
 };
 
 
-const deleteGamePublication = (req, res) => {
+const deleteGamePublication = (req, res = response) => {
   try {
     const { id } = req.params;
     Game
@@ -99,6 +97,27 @@ const deleteGamePublication = (req, res) => {
   }
 }
 
+const getGamesByRequirements = async (req, res = response) => {
+
+  const { requirements } = req.params;
+  try {
+
+    const games = await Game.find({ requirements });
+    console.log(games);
+    res.status(200).json({
+      ok: true,
+      msg: games
+    })
+
+  } catch (error) {
+    res.status(500).json({
+      ok: false,
+      msg: "Error interno, hable con el administrador."
+    })
+  }
+
+}
+
 
 
 
@@ -108,4 +127,5 @@ module.exports = {
   getOneGamePublication,
   updateGamePublication,
   deleteGamePublication,
+  getGamesByRequirements
 }
