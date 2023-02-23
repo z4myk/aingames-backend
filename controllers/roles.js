@@ -31,7 +31,18 @@ const createRole = async (req, res = response) => {
     }
 }
 
+const getRoles = async (req, res = response) => {
+
+    const role = await Role.find();
+
+    try {
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 module.exports = {
     createRole,
-
+    getRoles,
 }

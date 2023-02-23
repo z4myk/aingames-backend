@@ -2,10 +2,11 @@ const { response } = require('express');
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const { generateJWT } = require('../helpers/jwt');
+const Role = require('../models/Role');
 
-const createUser = async (req, res = response) => {
+const registerUser = async (req, res = response) => {
 
-    const { email, password } = req.body;
+    const { name, email, password } = req.body;
     try {
 
         let user = await User.findOne({ email });
@@ -16,14 +17,17 @@ const createUser = async (req, res = response) => {
             })
         }
 
+        //Role
+        const role = await Role.findOne({ name: 'Usuario' });
+
         //Encriptar password
-        user = new User(req.body);
+        user = new User({ name: name, email: email, password: password, role: role });
         const salt = bcrypt.genSaltSync();
         user.password = bcrypt.hashSync(password, salt);
         await user.save();
 
         //Generar JWT
-        const token = await generateJWT( user.id, user.name, user.role );
+        const token = await generateJWT(user.id, user.name, user.role);
 
         res.status(201).json({
             ok: true,
@@ -34,7 +38,10 @@ const createUser = async (req, res = response) => {
         });
 
     } catch (error) {
-        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: "Error interno, hable con el administrador."
+        })
     }
 }
 
@@ -43,16 +50,16 @@ const loginUser = async (req, res = response) => {
     const { email, password } = req.body
 
     try {
-        const user = await User.findOne({email});
-        if(!user){
+        const user = await User.findOne({ email });
+        if (!user) {
             return res.status(400).json({
-                ok:false,
+                ok: false,
                 msg: "No existe un usuario registrado con ese correo."
             })
         }
         //Validar password
-        const validPassword = bcrypt.compareSync( password, user.password );
-        if(!validPassword) {
+        const validPassword = bcrypt.compareSync(password, user.password);
+        if (!validPassword) {
             return res.status(400).json({
                 ok: false,
                 msg: "Contraseña incorrecta."
@@ -76,15 +83,15 @@ const loginUser = async (req, res = response) => {
 
 const revalidateToken = async (req, res) => {
 
-    const {uid, name, role } = req;
+    const { uid, name, email, role } = req;
     console.log(req);
 
     //Generar un nuevo JWT y retornarlo en esta petición
-    const token = await generateJWT( uid, name, role );
+    const token = await generateJWT(uid, name, email, role);
 
     res.json({
         ok: true,
-        uid, name,
+        uid, name, email,
         role,
         token
     })
@@ -92,7 +99,7 @@ const revalidateToken = async (req, res) => {
 
 
 module.exports = {
-    createUser,
+    registerUser,
     loginUser,
     revalidateToken,
 }
