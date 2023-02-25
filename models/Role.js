@@ -4,7 +4,7 @@ const rolesSchema = Schema({
 
     name: {
         type: String,
-        require: true,
+        required: true,
     }
 
 }, {

@@ -23,9 +23,21 @@ const uploadImage = async (req, res = response) => {
             if (err) return res.send({ error: err });
         });
 
+        // const imageExist = await Image.findOne({ url: urlImage });
+
+        // if (imageExist) {
+        //     await Image.deleteOne({ url: urlImage });
+            
+        //     const image = new Image({ ...req.body, url: urlImage });
+        //     const imgSave = await image.save();
+
+        //     res.status(200).json({
+        //         ok: true,
+        //         img: imgSave
+        //     })
+        // }
+
         const image = new Image({ ...req.body, url: urlImage });
-
-
         const imgSave = await image.save();
 
         res.status(200).json({
@@ -41,12 +53,12 @@ const uploadImage = async (req, res = response) => {
     }
 }
 
-const getOneImage = async(req, res = response) => {
+const getOneImage = async (req, res = response) => {
     const imageId = req.params.id;
     try {
         const image = await Image.findById(imageId);
         console.log(image);
-        if(!image){
+        if (!image) {
             return res.status(404).json({
                 ok: false,
                 msg: "No existe una imagen con esa id."
@@ -65,5 +77,5 @@ const getOneImage = async(req, res = response) => {
 
 module.exports = {
     uploadImage,
-    getOneImage
+    getOneImage,
 }

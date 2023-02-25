@@ -4,16 +4,15 @@ const { model, Schema } = require("mongoose");
 const downloadSchema = Schema({
     name: {
         type: String,
-        require: true,
+        required: true,
     },
     url: {
         type: String,
-        require: true,
+        required: true,
     },
     game: {
         type: Schema.Types.ObjectId,
         ref: 'Game',
-        require: true
       },
 
 }, {
