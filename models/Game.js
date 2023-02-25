@@ -25,18 +25,6 @@ const gameSchema = mongoose.Schema({
   notes: {
     type: String,
   },
-  serverOne: {
-    type: [Object],
-  },
-  serverTwo: {
-    type: [Object],
-  },
-  serverThree: {
-    type: [Object],
-  },
-  serverFour: {
-    type: [Object],
-  },
 }, {
   timestamps: true,
 });
