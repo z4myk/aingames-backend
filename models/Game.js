@@ -7,7 +7,7 @@ const gameSchema = mongoose.Schema({
   },
   requirements: {
     type: String,
-    require: true,
+    required: true,
   },
   steamId: {
     type: String,

@@ -31,9 +31,7 @@ const registerUser = async (req, res = response) => {
 
         res.status(201).json({
             ok: true,
-            uid: user.id,
-            name: user.name,
-            role: user.role,
+            user:user,
             token
         });
 

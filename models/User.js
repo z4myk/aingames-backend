@@ -2,17 +2,16 @@ const { Schema, model } = require('mongoose');
 
 const userSchema = Schema({
 
-    name: {
+    username: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
-
     email: {
         type: String,
         required: true,
         unique: true
     },
-
     password: {
         type: String,
         required: true
@@ -20,10 +19,16 @@ const userSchema = Schema({
     role: {
         type: Schema.Types.ObjectId,
         ref: 'Role',
-        require: true
+        required: true
+    },
+    name: {
+        type: String,
+    },
+    birthdate: {
+        type: Date,
     }
 
-},{
+}, {
     timestamps: true,
 }
 
