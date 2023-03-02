@@ -9,7 +9,7 @@ const router = Router();
 /* /api/images */
 
 router.use(validateJWT);
-router.use(checkRoleAuth(['Administrador']));
+// router.use(checkRoleAuth(['Administrador']));
 router.post('/upload', uploadImage);
 router.get('/', uploadImage);
 router.get('/:id', getOneImage);

@@ -64,7 +64,7 @@ const loginUser = async (req, res = response) => {
                 msg: "Contraseña incorrecta."
             });
         }
-        const token = await generateJWT(user.id, user.name, user.role);
+        const token = await generateJWT( user.id, user.name, user.role, user.email );
 
         res.json({
             ok: true,
@@ -79,7 +79,8 @@ const loginUser = async (req, res = response) => {
 
 const revalidateToken = async (req, res) => {
 
-    const { uid, name, role } = req;
+    const { uid, name, email, role } = req;
+    console.log(req);
 
     //Generar un nuevo JWT y retornarlo en esta petición
     const token = await generateJWT(uid, name, role);

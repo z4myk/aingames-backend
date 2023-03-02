@@ -119,14 +119,11 @@ const getGamesByRequirements = async (req, res = response) => {
 
 }
 
-
-
-
 module.exports = {
   createGamePublication,
   fetchGamePublication,
   getOneGamePublication,
   updateGamePublication,
   deleteGamePublication,
-  getGamesByRequirements
+  getGamesByRequirements,
 }

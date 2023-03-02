@@ -28,6 +28,9 @@ const gameSchema = mongoose.Schema({
   downloadserver: {
     type: [Object],
   },
+  mostDownloaded: {
+    type: Boolean,
+  },
 }, {
   timestamps: true,
 });

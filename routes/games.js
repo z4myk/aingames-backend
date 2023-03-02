@@ -1,4 +1,4 @@
-const {createGamePublication, fetchGamePublication, getOneGamePublication, updateGamePublication, deleteGamePublication, getGamesByRequirements} = require('../controllers/games');
+const {createGamePublication, fetchGamePublication, getOneGamePublication, updateGamePublication, deleteGamePublication, getGamesByRequirements } = require('../controllers/games');
 const {Router} = require('express');
 const { validateJWT } = require('../middlewares/validate-jwt');
 const { getSteamGameDetails } = require('../controllers/steam');
@@ -15,10 +15,9 @@ router.get('/', fetchGamePublication);
 router.get('/:id', getOneGamePublication);
 
 router.get('/level/:requirements', getGamesByRequirements);
-
 //A partir de aqui abajo todas las rutas estan protegidas por un token de administrador.
 router.use(validateJWT);
-router.use(checkRoleAuth(['Administrador']));
+// router.use(checkRoleAuth(['Administrador']));
 
 //update game post
 router.put('/:id', updateGamePublication);
