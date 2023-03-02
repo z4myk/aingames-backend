@@ -6,7 +6,7 @@ const Role = require('../models/Role');
 
 const registerUser = async (req, res = response) => {
 
-    const { name, email, password } = req.body;
+    const { name, email, password, username } = req.body;
     try {
 
         let user = await User.findOne({ email });
@@ -21,7 +21,7 @@ const registerUser = async (req, res = response) => {
         const role = await Role.findOne({ name: 'Usuario' });
 
         //Encriptar password
-        user = new User({ name: name, email: email, password: password, role: role });
+        user = new User({ username: username, name: name, email: email, password: password, role: role });
         const salt = bcrypt.genSaltSync();
         user.password = bcrypt.hashSync(password, salt);
         await user.save();
@@ -31,11 +31,12 @@ const registerUser = async (req, res = response) => {
 
         res.status(201).json({
             ok: true,
-            user:user,
+            user: user,
             token
         });
 
     } catch (error) {
+        console.log(error);
         res.status(500).json({
             ok: false,
             msg: "Error interno, hable con el administrador."
@@ -48,7 +49,7 @@ const loginUser = async (req, res = response) => {
     const { email, password } = req.body
 
     try {
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email }).populate('role', 'name');
         if (!user) {
             return res.status(400).json({
                 ok: false,
@@ -82,7 +83,7 @@ const revalidateToken = async (req, res) => {
 
     //Generar un nuevo JWT y retornarlo en esta petición
     const token = await generateJWT(uid, name, role);
-    const user = await User.findById(uid);
+    const user = await User.findById(uid).populate('role', 'name');
     res.json({
         ok: true,
         user: user,

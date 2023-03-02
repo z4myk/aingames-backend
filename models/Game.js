@@ -25,6 +25,9 @@ const gameSchema = mongoose.Schema({
   notes: {
     type: String,
   },
+  downloadserver: {
+    type: [Object],
+  },
 }, {
   timestamps: true,
 });

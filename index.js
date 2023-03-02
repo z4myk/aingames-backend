@@ -40,8 +40,12 @@ app.use('/api/images', require('./routes/images'));
 //Roles
 app.use('/api/roles', require('./routes/roles'));
 
+//Genre
+app.use('/api/genre', require('./routes/genre'));
+
 //Servidores de descarga
 app.use('/api/download', require('./routes/downloadServer'));
+
 
 // Add headers
 app.use(function (req, res, next) {
