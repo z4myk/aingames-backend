@@ -80,8 +80,6 @@ const loginUser = async (req, res = response) => {
 const revalidateToken = async (req, res) => {
 
     const { uid, name, email, role } = req;
-    console.log(req);
-
     //Generar un nuevo JWT y retornarlo en esta petición
     const token = await generateJWT(uid, name, role);
     const user = await User.findById(uid).populate('role', 'name');

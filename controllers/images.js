@@ -22,21 +22,7 @@ const uploadImage = async (req, res = response) => {
         file.mv(`./public/store/${req.body.game}/${file.name}`, err => {
             if (err) return res.send({ error: err });
         });
-
-        // const imageExist = await Image.findOne({ url: urlImage });
-
-        // if (imageExist) {
-        //     await Image.deleteOne({ url: urlImage });
-            
-        //     const image = new Image({ ...req.body, url: urlImage });
-        //     const imgSave = await image.save();
-
-        //     res.status(200).json({
-        //         ok: true,
-        //         img: imgSave
-        //     })
-        // }
-
+        
         const image = new Image({ ...req.body, url: urlImage });
         const imgSave = await image.save();
 

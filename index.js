@@ -3,6 +3,7 @@ require("dotenv").config();
 const cors = require("cors");
 const {dbConnection} = require('./database/config')
 const fileUpload = require("express-fileupload");
+const router = express.Router();
 
 //Creando sv express
 const app = express();
@@ -32,7 +33,7 @@ app.use('/api/games', require('./routes/games'));
 app.use('/api/auth', require('./routes/auth'));
 
 //User
-app.use('/api/user', require('./routes/user'));
+app.use('/api/users', require('./routes/user'));
 
 //Images
 app.use('/api/images', require('./routes/images'));
@@ -41,10 +42,19 @@ app.use('/api/images', require('./routes/images'));
 app.use('/api/roles', require('./routes/roles'));
 
 //Genre
-app.use('/api/genre', require('./routes/genre'));
+app.use('/api/genres', require('./routes/genres'));
 
 //Servidores de descarga
 app.use('/api/download', require('./routes/downloadServer'));
+
+//ads
+router.get('/ads.txt', (req, res) => {
+  const filePath = join(__dirname, 'public/ads.txt')
+  app.serveStatic(req, res, filePath)
+})
+router.get('*', (req, res) => handle(req, res))
+app.use(express.static(__dirname + '/public'));
+
 
 
 // Add headers
