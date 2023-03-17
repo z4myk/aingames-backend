@@ -6,28 +6,37 @@ const Role = require('../models/Role');
 
 const registerUser = async (req, res = response) => {
 
-    const { name, email, password, username } = req.body;
+    const { email, password, username } = req.body;
     try {
 
-        let user = await User.findOne({ email });
-        if (user) {
+        //Validar email y username
+        const validEmail = await User.findOne({email});
+        const validUsername = await User.findOne({username});
+
+        if (validEmail) {
             return res.status(400).json({
                 ok: false,
-                msg: 'Ya existe un usuario con ese correo.'
-            })
+                msg: `El correo ${email} ya se encuentra registrado.`
+            });
+        }
+        if (validUsername) {
+            return res.status(400).json({
+                ok: false,
+                msg: `El username ${username} ya se encuentra registrado.`
+            });
         }
 
         //Role
         const role = await Role.findOne({ name: 'Usuario' });
 
         //Encriptar password
-        user = new User({ username: username, name: name, email: email, password: password, role: role });
+        let user = new User({ username: username, email: email, password: password, role: role });
         const salt = bcrypt.genSaltSync();
         user.password = bcrypt.hashSync(password, salt);
         await user.save();
 
         //Generar JWT
-        const token = await generateJWT(user.id, user.name, user.role);
+        const token = await generateJWT(user.id, user.username, user.role);
 
         res.status(201).json({
             ok: true,
@@ -56,15 +65,16 @@ const loginUser = async (req, res = response) => {
                 msg: "No existe un usuario registrado con ese correo."
             })
         }
+
         //Validar password
         const validPassword = bcrypt.compareSync(password, user.password);
         if (!validPassword) {
             return res.status(400).json({
                 ok: false,
-                msg: "Contraseña incorrecta."
+                msg: "El email o la contraseña ingresada son incorrectos."
             });
         }
-        const token = await generateJWT( user.id, user.name, user.role, user.email );
+        const token = await generateJWT(user.id, user.username, user.role, user.email);
 
         res.json({
             ok: true,
@@ -79,9 +89,9 @@ const loginUser = async (req, res = response) => {
 
 const revalidateToken = async (req, res) => {
 
-    const { uid, name, email, role } = req;
+    const { uid, username, role } = req;
     //Generar un nuevo JWT y retornarlo en esta petición
-    const token = await generateJWT(uid, name, role);
+    const token = await generateJWT(uid, username, role);
     const user = await User.findById(uid).populate('role', 'name');
     res.json({
         ok: true,

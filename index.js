@@ -33,7 +33,7 @@ app.use('/api/games', require('./routes/games'));
 app.use('/api/auth', require('./routes/auth'));
 
 //User
-app.use('/api/users', require('./routes/user'));
+app.use('/api/user', require('./routes/user'));
 
 //Images
 app.use('/api/images', require('./routes/images'));
@@ -44,8 +44,6 @@ app.use('/api/roles', require('./routes/roles'));
 //Genre
 app.use('/api/genres', require('./routes/genres'));
 
-//Servidores de descarga
-app.use('/api/download', require('./routes/downloadServer'));
 
 //ads
 router.get('/ads.txt', (req, res) => {

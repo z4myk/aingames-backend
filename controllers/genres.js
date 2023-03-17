@@ -3,9 +3,9 @@ const { response } = require("express");
 
 const createGenre = async (req, res = response) => {
     const { name } = req.body;
-    const index = name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().split(' ').join('-');
-
+    
     try {
+        const index = name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().split(' ').join('-');
         let genre = await Genre.findOne({ name });
         if (genre) {
             return res.status(400).json({

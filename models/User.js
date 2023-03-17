@@ -1,7 +1,6 @@
 const { Schema, model } = require('mongoose');
 
 const userSchema = Schema({
-
     username: {
         type: String,
         required: true,
@@ -21,13 +20,9 @@ const userSchema = Schema({
         ref: 'Role',
         required: true
     },
-    name: {
-        type: String,
-    },
     birthdate: {
         type: Date,
-    }
-
+    },
 }, {
     timestamps: true,
 }

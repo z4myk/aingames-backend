@@ -61,7 +61,35 @@ const getOneImage = async (req, res = response) => {
     }
 }
 
+const deleteImage = async (req, res = response) => {
+    const game = req.body.steamId;
+    console.log(req.body);
+    try {
+        const image = await Image.findOne({game});
+        if (!image) {
+            return res.status(404).json({
+                ok: false,
+                msg: "No existe una imagen con esa id."
+            })
+        }
+
+        await Image.findOneAndDelete({game});
+
+        res.status(200).json({
+            ok: true,
+            msg: "La imagen se ha borrado."
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            ok: false,
+            msg: "Error interno, hable con el administrador."
+        })
+    }
+}
+
 module.exports = {
     uploadImage,
     getOneImage,
+    deleteImage
 }

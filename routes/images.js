@@ -1,5 +1,5 @@
 const {Router} = require('express');
-const { uploadImage, getOneImage} = require('../controllers/images');
+const { uploadImage, getOneImage, deleteImage} = require('../controllers/images');
 const { checkRoleAuth } = require('../middlewares/roleAuth');
 const { validateJWT } = require('../middlewares/validate-jwt');
 const router = Router();
@@ -11,9 +11,7 @@ const router = Router();
 router.use(validateJWT);
 // router.use(checkRoleAuth(['Administrador']));
 router.post('/upload', uploadImage);
-router.get('/', uploadImage);
+router.delete('/', deleteImage);
 router.get('/:id', getOneImage);
-
-
 
 module.exports = router;
