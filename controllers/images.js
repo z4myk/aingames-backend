@@ -43,7 +43,6 @@ const getOneImage = async (req, res = response) => {
     const imageId = req.params.id;
     try {
         const image = await Image.findById(imageId);
-        console.log(image);
         if (!image) {
             return res.status(404).json({
                 ok: false,
@@ -57,7 +56,11 @@ const getOneImage = async (req, res = response) => {
         })
 
     } catch (error) {
-        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: "Error interno, hable con un administrador.",
+            error
+          })
     }
 }
 

@@ -10,7 +10,11 @@ const createGamePublication = (req, res = response) => {
       .then((data) => res.json(data))
       .catch((error) => res.json({ msg: error }));
   } catch (error) {
-    console.log(error);
+    res.status(500).json({
+      ok: false,
+      msg: "Error interno, hable con un administrador.",
+      error
+    })
   }
 };
 
@@ -21,7 +25,11 @@ const fetchGamePublication = (req, res) => {
       .then((data) => res.json(data))
       .catch((error) => res.json({ msg: error }));
   } catch (error) {
-    console.log(error);
+    res.status(500).json({
+      ok: false,
+      msg: "Error interno, hable con un administrador.",
+      error
+    })
   }
 };
 
@@ -32,7 +40,6 @@ const getOneGamePublication = async (req, res = response) => {
 
   try {
     const game = await Game.findById(gameId);
-    console.log(game);
     if (!game) {
       return res.status(404).json({
         ok: false,
@@ -46,10 +53,10 @@ const getOneGamePublication = async (req, res = response) => {
     })
 
   } catch (error) {
-    console.log(error);
     res.status(500).json({
       ok: false,
-      msg: "Error interno, hable con un administrador."
+      msg: "Error interno, hable con un administrador.",
+      error
     })
   }
 };
@@ -93,18 +100,18 @@ const deleteGamePublication = (req, res = response) => {
       .then((data) => res.json(data))
       .catch((error) => res.json({ msg: error }))
   } catch (error) {
-    console.log(error)
+    res.status(500).json({
+      ok: false,
+      msg: "Error interno, hable con un administrador.",
+      error
+    })
   }
 }
 
 const getGamesByRequirements = async (req, res = response) => {
-
   const { requirements } = req.params;
-  
   try {
-
     const games = await Game.find({ requirements });
-    console.log(games);
     res.status(200).json({
       ok: true,
       msg: games
@@ -113,7 +120,8 @@ const getGamesByRequirements = async (req, res = response) => {
   } catch (error) {
     res.status(500).json({
       ok: false,
-      msg: "Error interno, hable con un administrador."
+      msg: "Error interno, hable con un administrador.",
+      error
     })
   }
 

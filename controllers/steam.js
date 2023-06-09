@@ -11,9 +11,8 @@ function getSteamGameDetails(req, res = response) {
 
         if (this.readyState === 4 && this.status === 200) {
             const obj = JSON.parse(this.responseText);
-            const key = appids
-            const { [key]: y } = obj
-            // console.log(y.data);
+            const key = appids;
+            const { [key]: y } = obj;
             res.json({
                 resp: y.data,
             })

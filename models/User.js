@@ -23,6 +23,15 @@ const userSchema = Schema({
     birthdate: {
         type: Date,
     },
+    resetToken: {
+        type: String,
+        default: null
+    },
+    resetTokenExpiration: {
+        type: Date,
+        default: null
+    },
+
 }, {
     timestamps: true,
 }

@@ -31,6 +31,9 @@ const gameSchema = mongoose.Schema({
   mostDownloaded: {
     type: Boolean,
   },
+  reviews: {
+    type: [Object],
+  },
 }, {
   timestamps: true,
 });

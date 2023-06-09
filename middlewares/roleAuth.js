@@ -16,7 +16,11 @@ const checkRoleAuth = (roles) => async (req, res = response, next) => {
             })          
         }
     } catch (error) {
-        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: "Error interno, hable con un administrador.",
+            error: error,
+        })          
     }
 }
 

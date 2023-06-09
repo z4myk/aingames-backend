@@ -17,7 +17,11 @@ const getUsers = async (req, res = response) => {
         })
 
     } catch (error) {
-        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: "Error interno, hable con un administrador.",
+            error
+          })
     }
 }
 
@@ -42,10 +46,10 @@ const getOneUser = async (req, res = response) => {
         })
 
     } catch (error) {
-        console.log(error);
         res.status(500).json({
             ok: false,
-            msg: "Error interno, hable con un administrador."
+            msg: "Error interno, hable con un administrador.",
+            error: error,
         })
     }
 }
