@@ -1,7 +1,7 @@
 const express = require("express");
 require("dotenv").config();
 const cors = require("cors");
-const {dbConnection} = require('./database/config')
+const { dbConnection } = require('./database/config');
 const fileUpload = require("express-fileupload");
 const router = express.Router();
 
@@ -15,7 +15,7 @@ dbConnection();
 app.use(cors());
 
 //Directorio público
-app.use( express.static('public') );
+app.use(express.static('public'));
 
 //interpretar archivos
 app.use(fileUpload({
@@ -44,6 +44,8 @@ app.use('/api/roles', require('./routes/roles'));
 //Genre
 app.use('/api/genres', require('./routes/genres'));
 
+//Video
+app.use('/api/videos', require('./routes/video'));
 
 //ads
 router.get('/ads.txt', (req, res) => {

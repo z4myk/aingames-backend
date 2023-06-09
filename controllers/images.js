@@ -34,7 +34,7 @@ const uploadImage = async (req, res = response) => {
     } catch (error) {
         res.status(500).json({
             ok: false,
-            msg: 'Error interno, hable con el administrador.'
+            msg: "Error interno, hable con un administrador."
         })
     }
 }
@@ -63,7 +63,6 @@ const getOneImage = async (req, res = response) => {
 
 const deleteImage = async (req, res = response) => {
     const game = req.body.steamId;
-    console.log(req.body);
     try {
         const image = await Image.findOne({game});
         if (!image) {
@@ -77,13 +76,13 @@ const deleteImage = async (req, res = response) => {
 
         res.status(200).json({
             ok: true,
-            msg: "La imagen se ha borrado."
+            msg:'La imagen se ha borrado de la base de datos.'
         })
 
     } catch (error) {
         return res.status(500).json({
             ok: false,
-            msg: "Error interno, hable con el administrador."
+            msg: "Error interno, hable con un administrador."
         })
     }
 }

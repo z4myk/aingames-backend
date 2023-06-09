@@ -49,7 +49,7 @@ const getOneGamePublication = async (req, res = response) => {
     console.log(error);
     res.status(500).json({
       ok: false,
-      msg: "Hablar con el administrador."
+      msg: "Error interno, hable con un administrador."
     })
   }
 };
@@ -79,7 +79,7 @@ const updateGamePublication = async (req, res = response) => {
   } catch (error) {
     res.status(500).json({
       ok: false,
-      msg: "Error interno, hable con el administrador."
+      msg: "Error interno, hable con un administrador."
     })
   }
 };
@@ -113,7 +113,7 @@ const getGamesByRequirements = async (req, res = response) => {
   } catch (error) {
     res.status(500).json({
       ok: false,
-      msg: "Error interno, hable con el administrador."
+      msg: "Error interno, hable con un administrador."
     })
   }
 
