@@ -4,7 +4,14 @@ const Game = require("../models/Game");
 const createGamePublication = (req, res = response) => {
 
   try {
-    const gamePublication = Game(req.body);
+    const index = req.body.name.toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^\w-]+/g, '')
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/&/g, '%26')
+      .replace(/\?/g, '%3F');
+
+    const gamePublication = Game({ ...req.body, index: index });
     gamePublication
       .save()
       .then((data) => res.json(data))
@@ -35,9 +42,7 @@ const fetchGamePublication = (req, res) => {
 
 //Obtener un juego.
 const getOneGamePublication = async (req, res = response) => {
-
   const gameId = req.params.id;
-
   try {
     const game = await Game.findById(gameId);
     if (!game) {

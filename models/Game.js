@@ -5,6 +5,11 @@ const gameSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  index: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   requirements: {
     type: String,
     required: true,
