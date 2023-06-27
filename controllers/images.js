@@ -12,7 +12,7 @@ const uploadImage = async (req, res = response) => {
 
         const { file } = req.files;
         file.name = `${req.body.name}.png`;
-        const urlImage = `https://localhost:9001/store/${req.body.game}/${file.name}`;
+        const urlImage = `https://api.aintech.online/store/${req.body.game}/${file.name}`;
         const dir = `./public/store/${req.body.game}`;
 
         if (!fs.existsSync(dir)) {
